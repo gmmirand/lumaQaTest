@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "repository": {
     "type": "git",
@@ -17,12 +19,26 @@
     "url": "https://github.com/gmmirand/lumaQaTest/issues"
   },
   "homepage": "https://github.com/gmmirand/lumaQaTest#readme",
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "cypress/e2e/step_definitions/**/*.{js,ts}",
+    "specPattern": "cypress/e2e/features/**/*.feature"
+  },
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^23.1.0",
+    "@cucumber/gherkin": "^35.0.0",
     "@cypress/webpack-preprocessor": "^7.0.1",
+    "@types/chai": "^5.2.2",
     "@types/cypress": "^0.1.6",
-    "@types/node": "^24.3.1",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.3.3",
+    "chai": "^6.0.1",
     "cypress": "^15.2.0",
+    "cypress-file-upload": "^5.0.8",
+    "esbuild": "^0.25.9",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.2.0",
+    "ts-loader": "^9.5.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   }
