@@ -11,6 +11,19 @@ export default defineConfig({
       await addCucumberPreprocessorPlugin(on, config);
 
       on('task', {
+
+        copyFileToFixtures({ fileName }: { fileName: string }) {
+          const downloadsPath = path.join(config.downloadsFolder, fileName);
+          const fixturesPath = path.join(config.fixturesFolder || 'cypress/fixtures', fileName);
+
+          if (!fs.existsSync(downloadsPath)) {
+            throw new Error(`File not found in downloads: ${downloadsPath}`);
+          }
+
+          fs.copyFileSync(downloadsPath, fixturesPath);
+          return true;
+        },
+
         deleteFileIfExists({ fileName }: { fileName: string }) {
           const filePath = path.join(config.downloadsFolder, fileName);
           if (fs.existsSync(filePath)) {

@@ -7,8 +7,8 @@ export class UploadDownloadPage {
     cy.get(this.downloadButton).click();
   }
 
-  uploadFile(fileName: string) {
-    cy.get(this.uploadInput).attachFile(fileName);
+  uploadFile(file: { fileName: string }) {
+    cy.get(this.uploadInput).attachFile(file.fileName);
   }
 
   assertUploadedFile(fileName: string) {
