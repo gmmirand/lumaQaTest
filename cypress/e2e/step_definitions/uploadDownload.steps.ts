@@ -40,7 +40,6 @@ When('I prepare the sample file for upload', () => {
   });
 });
 
-
 When('I upload the sample file', () => {
   ud.uploadFile({ fileName }); // Passa apenas o fileName
 });
