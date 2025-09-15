@@ -2,7 +2,6 @@
 
 import './commands';
 import 'cypress-file-upload';
-import "cypress-real-events/support";
 
 
 // Ignorar erros de script não capturados da aplicação

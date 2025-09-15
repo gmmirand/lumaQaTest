@@ -4,10 +4,14 @@ export class MainPage {
   }
 
   clickCard(cardName: string) {
-    cy.contains('.card-body h5', cardName).click();
+    cy.contains('.card-body h5', cardName)
+      .should('be.visible')
+      .click();
   }
 
   clickSidebarOption(option: string) {
-    cy.contains('.element-list .menu-list li', option).click();
+    cy.contains('.element-list .menu-list li', option)
+      .should('be.visible')
+      .click();
   }
 }
