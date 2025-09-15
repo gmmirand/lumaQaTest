@@ -1,6 +1,6 @@
 export class MainPage {
   openHomePage() {
-    cy.visit('/');
+    cy.visit('https://demoqa.com');
   }
 
   clickCard(cardName: string) {
