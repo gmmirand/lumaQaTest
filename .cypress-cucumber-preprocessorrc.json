@@ -1,7 +1,9 @@
 {
   "stepDefinitions": [
-    "cypress/e2e/step_definitions/**/*.{js,ts}"
+    "cypress/e2e/step_definitions/**/*.ts",
+    "cypress/api/stepDefinitions/**/*.ts"
   ],
+  
   "filterSpecs": true,
   "omitFiltered": true,
   "json": {
