@@ -23,23 +23,26 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Cypress tests (UI + API) on Chrome
+      - name: Run Cypress tests (UI + API) on headless Chrome
         run: |
-          npx cypress run --browser chrome --reporter mochawesome \
+          npx cypress run --browser chrome --headless --reporter mochawesome \
             --reporter-options "reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true"
 
-      - name: Merge Mochawesome JSONs
+      - name: Merge Mochawesome JSONs (skip empty/corrupted)
         run: |
-          if compgen -G "cypress/reports/mochawesome/*.json" > /dev/null; then
-            npx mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome/mochawesome.json
+          mkdir -p cypress/reports/mochawesome
+          JSON_FILES=$(find cypress/reports/mochawesome -name "*.json" -size +0c)
+          if [ -n "$JSON_FILES" ]; then
+            npx mochawesome-merge $JSON_FILES > cypress/reports/mochawesome/mochawesome.json
           else
-            echo "No JSON reports found, skipping merge"
+            echo "No valid JSON reports found, skipping merge"
           fi
 
       - name: Generate HTML report
         run: |
           if [ -f cypress/reports/mochawesome/mochawesome.json ]; then
-            npx marge cypress/reports/mochawesome/mochawesome.json --reportDir cypress/reports/mochawesome --inline
+            npx marge cypress/reports/mochawesome/mochawesome.json \
+              --reportDir cypress/reports/mochawesome --inline
           else
             echo "No merged JSON report found, skipping HTML generation"
           fi
