@@ -4,8 +4,8 @@ Feature: Web Tables
     Given I open the DemoQA home page
     When I click on the "Elements" card
     And I click on the "Web Tables" option in the sidebar
-    And I add a new user with first name "John" and last name "Doe"
-    Then I should see the user "John" in the table
+    And I add a new user with first name "Gabriel" and last name "Test"
+    Then I should see the user "Gabriel" in the table
 
   Scenario: Delete a row from the web table
     Given I open the DemoQA home page
