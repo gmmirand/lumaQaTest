@@ -1,190 +1,169 @@
-# lumaQaTest
+# Luma QA Test Automation
+
+![Cypress Tests](https://github.com/gmmirand/lumaQaTest/actions/workflows/cypress.yml/badge.svg)
+
+---
+## 1. Overview
+
+Automation suite covering UI ([DemoQA](https://demoqa.com/)) and API ([Restful API](https://restful-api.dev/)) validations, built with Cypress + TypeScript + Cucumber (BDD).
+
+UI: Page Object Model for maintainable interactions, Gherkin steps for readability, validations on key workflows (e.g., Web Tables, Alerts).
+
+API: CRUD tests with reusable, parameterized steps and assertions on status codes + payloads.
+
+Reports: Unified with Mochawesome, including screenshots on failure.
+
+CI/CD: Runs on every push/PR to main, ensuring fast feedback and preventing regressions.
+
+## Techs Used
+- [Cypress](https://www.cypress.io/) – End-to-End & API testing
+- [TypeScript](https://www.typescriptlang.org/) – Static typing
+- [Cucumber](https://cucumber.io/) – BDD with Gherkin
+- [Mochawesome](https://github.com/adamgruber/mochawesome) – Test reporting
+- [Node.js](https://nodejs.org/) – Runtime
+- [GitHub Actions](https://docs.github.com/actions) – CI/CD pipeline
 
 ---
 
-## Overview
+## 2. Process & Approach
 
-This project automates end-to-end and API tests for [DemoQA](https://demoqa.com) using **Cypress**, **TypeScript**, and **Cucumber (Gherkin)**. The goal is to ensure UI and API quality through maintai
+| Aspect | Summary |
+|--------|---------|
+| Planning | Split scope into UI (component interactions) + API (CRUD baseline). Started with API to validate framework wiring, then layered UI features. |
+| Architecture | Structured by domain: `features` (behavior), `step_definitions`, `pages` (selectors & actions), `support` (global config). |
+| Reuse | Centralized selectors in Page Objects; generic step patterns for HTTP verbs and UI interactions. |
+| Stability | Added retries (`runMode: 2`) and modest timeouts to reduce false negatives due to external demo site variability. |
+| Reporting | Chose Mochawesome for fast integration + JSON merge → single HTML artifact. |
+| CI Strategy | Separate UI and API executions inside one workflow to keep clarity of failures and merge reports afterward. |
+| Maintainability | Favor small, declarative feature files; isolate DOM details away from Gherkin. |
+| Reviewability | README emphasizes setup → run → extend, plus explicit assumptions & design notes for evaluators. |
 
 ---
 
-## Project Structure
+## 3. Project Structure (Essential View)
 
 ```
 cypress/
-  api/                        # API tests and helpers
-  downloads/                  # Files downloaded during tests
+  api/
+    features/            # API .feature files
   e2e/
-    features/                 # .feature files (BDD), organized by area
-      alertsFrameWindows/
-      elements/
-      widgets/
-    pages/                    # Page Objects, organized by area
-      alertsFrameWindows/
-      elements/
-      widgets/
-      mainPage.ts
-    step_definitions/         # Step definitions for Gherkin scenarios
-      alertsFrameWindows/
-      elements/
-      widgets/
-      API.steps.ts
-      common.steps.ts
-  fixtures/                   # Test data and support files
-  reports/                    # Test execution reports (Mochawesome)
-  screenshots/                # Test failure evidence
-  support/                    # Custom commands and global config
-    commands.ts
-    e2e.ts
-    index.d.ts
+    features/            # UI .feature files grouped by domain
+    pages/               # Page Objects (selectors + actions)
+    step_definitions/    # UI & shared steps
+  fixtures/              # Test data / static assets
+  reports/               # Mochawesome output (JSON + merged HTML)
+  screenshots/           # Captured on failures
+  support/               # Commands + global hooks
+.github/workflows/
+  cypress.yml            # CI pipeline
+cypress.config.ts        # Cypress + Cucumber integration
+.cypress-cucumber-preprocessorrc.json
 ```
 
 ---
 
-## Test - Locally and Mocha via GitHub Actions
+## 4. Setup Requirements
 
-<img width="555" height="737" alt="Screenshot 2025-09-16 at 17 59 26" src="https://github.com/user-attachments/assets/9884f57c-b3d4-481f-a625-30137b3c3f2d" />
-
-<img width="1429" height="416" alt="image" src="https://github.com/user-attachments/assets/ab8d0752-6f8e-44bc-882b-b01dd5ea9141" />
-
----
-
-## Technologies Used
-
-- [Cypress](https://www.cypress.io/) (end-to-end testing)
-- [Cucumber](https://github.com/badeball/cypress-cucumber-preprocessor) (BDD)
-- [TypeScript](https://www.typescriptlang.org/) (static typing)
-- [Mochawesome](https://github.com/adamgruber/mochawesome) (reporting)
-- [Node.js](https://nodejs.org/)
-- **GitHub Actions** (CI/CD)
+| Requirement | Version / Note |
+|-------------|----------------|
+| Node.js | >= 18 (CI uses 22) |
+| npm | >= 8 |
+| OS | macOS / Linux / Windows |
+| Browsers | Chrome (headless in CI) |
 
 ---
 
-## Setup Instructions
+## 5. Installation
 
-### 1. Prerequisites
-
-- Node.js (>= 16.x)
-- npm (>= 8.x) or yarn
-
-### 2. Installation
-
-Clone the repository and install dependencies:
-
-```sh
+```bash
 git clone git@github.com:gmmirand/lumaQaTest.git
 cd lumaQaTest
 npm install
 ```
 
-### 3. Running the Tests Locally
-
-#### Run all tests in headless mode:
-```sh
-npx cypress run
-```
-
-#### Run tests with the Cypress GUI:
-```sh
-npx cypress open
-```
-
-#### View Mochawesome report:
-After running the tests, open:
-```
-cypress/reports/mochawesome.html
-```
+> or `npm ci` to ensures a clean, lockfile-faithful install (same as CI).
 
 ---
 
-## CI/CD with GitHub Actions
+## 6. Running the Tests (Local)
 
-This project includes a GitHub Actions workflow to automatically install dependencies, run all tests, and generate reports on every push and pull request.
+| Goal | Command |
+|------|---------|
+| All tests (UI + API) | `npx cypress run` |
+| UI only | `npx cypress run --spec "cypress/e2e/features/**/*.feature"` |
+| API only | `npx cypress run --spec "cypress/api/features/**/*.feature"` |
+| Specific feature | `npx cypress run --spec "cypress/e2e/features/elements/<file>.feature"` |
+| Interactive mode (GUI) | `npx cypress open` |
+| Override baseUrl (temporary) | `npx cypress run --config baseUrl=https://demoqa.com` |
 
-**Workflow file:** `.github/workflows/ci.yml`
-
-```yaml
-# filepath: .github/workflows/ci.yml
-name: CI
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  cypress-run:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run Cypress tests
-        run: npx cypress run
-
-      - name: Upload Mochawesome Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: mochawesome-report
-          path: cypress/reports/
-```
-
-After each run, the Mochawesome report will be available as a downloadable artifact in the GitHub Actions summary.
+Report (merged HTML) path after CI or manual merge:  
+`cypress/reports/merged/mochawesome.html`
 
 ---
 
-## Test Organization
+## 7. Reporting
 
-- **Features:** Each system feature has a `.feature` file describing scenarios in natural language.
-- **Pages:** Each system page has a Page Object, centralizing selectors and actions.
-- **Step Definitions:** Steps for `.feature` scenarios are implemented in `.steps.ts` files, organized by area.
-- **Fixtures:** Support data and files for upload/download.
-- **Reports/Screenshots:** Execution reports and evidence.
-
----
-
-## Design Decisions & Assumptions
-
-- **Modular Organization:** Tests are divided by system area (widgets, elements, alertsFrameWindows) for maintainability and scalability.
-- **Page Object Model:** Used to centralize selectors and actions, avoiding duplication and easing updates.
-- **Selectors Abstraction:** All selectors are abstracted in Page Object files for maintainability.
-- **Highly Parameterized Steps:** Step definitions are written to be reusable and parameterized.
-- **BDD:** Cucumber is adopted to make scenarios readable for both technical and non-technical stakeholders.
-- **Mochawesome Reports:** For easy analysis and troubleshooting.
-- **Assumption:** The test environment is stable and DemoQA data can be manipulated freely.
-- **Assumption:** The project will be run locally or in CI with Node.js installed.
+- Each test batch produces Mochawesome JSON.
+- CI merges all JSON → single `mochawesome.html` (inline assets).
+- Artifacts (report + screenshots) are attached to the workflow run.
+- Local viewing (macOS example):
+  ```bash
+  open cypress/reports/merged/mochawesome.html
+  ```
 
 ---
 
-## How to Add New Tests
+## 8. CI Pipeline (GitHub Actions)
 
-1. Create a new `.feature` file in the appropriate folder under `cypress/e2e/features/`.
-2. Implement the steps in a new `.steps.ts` file under `cypress/e2e/step_definitions/`.
-3. If needed, create or update the Page Object in `cypress/e2e/pages/`.
-4. Run the tests to ensure everything works.
+Workflow: [.github/workflows/cypress.yml](./.github/workflows/cypress.yml)
+
+Steps:
+1. Checkout & Node setup
+2. Install dependencies (`npm ci`)
+3. Run UI tests (Chrome headless)
+4. Run API tests
+5. Merge Mochawesome JSON → HTML
+6. Upload artifacts (report, screenshots, videos if enabled)
+
+Triggered on: push / pull_request targeting `main`.
 
 ---
 
-## Questions or Issues?
+## 9. Design Decisions & Assumptions
 
-Open an issue or contact the repository maintainer.
+| Decision / Assumption | Rationale |
+|-----------------------|-----------|
+| Page Object Model | Centralizes selectors & UI actions for easier maintenance. |
+| Parameterized Steps | Reduce duplication: a single pattern handles different endpoints/fields. |
+| Retries (`runMode: 2`) | Mitigate transient network/demo site fluctuations. |
+| Mochawesome reporter | Quick setup + merged summary artifact for evaluators. |
+| Higher default timeouts | Offset potential latency of public demo environments. |
+| Independent scenarios | No test relies on artifacts created by prior scenarios (improves reliability). |
+| Data creation on-demand in API tests | Ensures clean isolation (create → update/delete within same scenario). |
 
 ---
 
-**Bonus Features Implemented:**
-- Mochawesome reporter for test results.
-- All selectors abstracted in Page Objects.
-- Highly parameterized step definitions for reusability.
+## 10. Adding a New Test (Minimal Steps)
+
+1. Create a `.feature` file under the correct domain folder (UI or API).
+2. Reuse existing step definitions if possible.
+3. If a new UI component: add methods/selectors in a Page Object.
+4. Run the single spec:
+   ```bash
+   npx cypress run --spec "cypress/e2e/features/<domain>/new.feature"
+   ```
+5. Check report & artifacts.
+
+---
+
+## 11. Evidence (Current Passing State)
+
+All tests passing (terminal):
+
+<img width="555" height="737" alt="All tests passing (terminal)" src="https://github.com/user-attachments/assets/9884f57c-b3d4-481f-a625-30137b3c3f2d" />
+
+Mochawesome merged report:
+
+<img width="1429" height="416" alt="Mochawesome merged report" src="https://github.com/user-attachments/assets/ab8d0752-6f8e-44bc-882b-b01dd5ea9141" />
 
 ---
