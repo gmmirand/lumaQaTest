@@ -43,7 +43,7 @@ cypress/
 
 ## Test - Locally and Mocha via GitHub Actions
 
-<img width="770" height="756" alt="image" src="https://github.com/user-attachments/assets/5ad4b3d9-5e48-4a8c-96ee-d2b2a9ca7b58" />
+<img width="555" height="737" alt="Screenshot 2025-09-16 at 17 59 26" src="https://github.com/user-attachments/assets/9884f57c-b3d4-481f-a625-30137b3c3f2d" />
 
 <img width="1429" height="416" alt="image" src="https://github.com/user-attachments/assets/ab8d0752-6f8e-44bc-882b-b01dd5ea9141" />
 
