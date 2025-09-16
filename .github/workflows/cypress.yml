@@ -1,53 +1,59 @@
 name: Cypress Tests
 
 on:
-  pull_request:
+  push:
     branches:
       - main
-  push:
+  pull_request:
     branches:
       - main
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      # 1️⃣ Baixa o código
+      - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2️⃣ Configura Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: '22'
 
+      # 3️⃣ Instala dependências
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Cypress tests (UI + API) on Chrome
+      # 4️⃣ Roda todos os testes UI + API em modo headless no Chrome e gera Mochawesome
+      - name: Run Cypress tests
         run: |
-          mkdir -p cypress/reports/mochawesome
-          npx cypress run --browser chrome --reporter mochawesome \
-            --reporter-options "reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true"
+          npx cypress run --browser chrome --headless \
+            --reporter mochawesome \
+            --reporter-options reportDir=cypress/reports/mochawesome,json=true,html=true,overwrite=true
 
-      - name: Merge Mochawesome JSONs
-        run: |
-          JSON_FILES=$(ls cypress/reports/mochawesome/*.json || true)
-          if [ -n "$JSON_FILES" ]; then
-            npx mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome/mochawesome.json
-          else
-            echo "No JSON reports found, skipping merge"
-          fi
-
-      - name: Generate consolidated HTML report
-        run: |
-          if [ -f cypress/reports/mochawesome/mochawesome.json ]; then
-            npx marge cypress/reports/mochawesome/mochawesome.json --reportDir cypress/reports/mochawesome --inline
-          else
-            echo "No merged JSON report found, skipping HTML generation"
-          fi
-
+      # 5️⃣ Upload do relatório Mochawesome
       - name: Upload Cypress report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cypress-report
           path: cypress/reports/mochawesome
+
+      # 6️⃣ Upload de screenshots (caso existam)
+      - name: Upload Cypress screenshots
+        if: always() && hashFiles('cypress/screenshots/**') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      # 7️⃣ Upload de vídeos (caso existam)
+      - name: Upload Cypress videos
+        if: always() && hashFiles('cypress/videos/**') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos
