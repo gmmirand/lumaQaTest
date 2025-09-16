@@ -7,7 +7,7 @@ import webpack from '@cypress/webpack-preprocessor';
 export default defineConfig({
   e2e: {
     async setupNodeEvents(on, config) {
-      // Configura o Cucumber plugin
+      // Cucumber plugin
       await addCucumberPreprocessorPlugin(on, config);
 
       // Tasks personalizadas
@@ -39,7 +39,7 @@ export default defineConfig({
         }
       });
 
-      // Configura o Webpack preprocessor para TypeScript e Cucumber
+      // Webpack preprocessor para TS e Cucumber
       on(
         'file:preprocessor',
         webpack({
@@ -60,8 +60,8 @@ export default defineConfig({
                       options: {
                         ...config,
                         stepDefinitions: [
-                          'cypress/e2e/step_definitions/**/*.ts', // UI steps
-                          'cypress/api/stepDefinitions/**/*.ts',  // API steps
+                          'cypress/e2e/step_definitions/**/*.ts',
+                          'cypress/api/stepDefinitions/**/*.ts',
                         ],
                       },
                     },
@@ -79,13 +79,16 @@ export default defineConfig({
 
     // Specs
     specPattern: [
-      'cypress/e2e/features/**/*.feature',  // UI features
-      'cypress/api/features/**/*.feature',  // API features
+      'cypress/e2e/features/**/*.feature',
+      'cypress/api/features/**/*.feature',
     ],
 
     supportFile: 'cypress/support/e2e.ts',
     baseUrl: 'https://api.restful-api.dev',
     downloadsFolder: 'cypress/downloads',
+
+    screenshotsFolder: 'cypress/screenshots',
+    trashAssetsBeforeRuns: true,
   },
 
   video: false,
