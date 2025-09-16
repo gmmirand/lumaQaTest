@@ -1,7 +1,4 @@
 Feature: Progress Bar
-  As a user
-  I want to control the progress bar
-  So that I can start, stop, and reset it
 
   Scenario: Start the progress bar
     Given I open the DemoQA home page

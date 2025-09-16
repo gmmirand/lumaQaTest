@@ -1,7 +1,4 @@
 Feature: Select Menu
-  As a user
-  I want to interact with the Select Menu widget
-  So that I can validate all dropdowns and selects
 
   Scenario: Select a value from "Select Value"
     Given I open the DemoQA home page

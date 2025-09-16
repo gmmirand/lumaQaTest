@@ -2,9 +2,9 @@ export class MainPage {
 
   openHomePage() {
     cy.visit('https://demoqa.com', {
-      timeout: 120000, // timeout total
-      onLoad: undefined, // ignora o evento load
-      failOnStatusCode: false // opcional, se o site pode retornar 3xx/4xx
+      timeout: 180000,
+      onLoad: undefined,
+      failOnStatusCode: false
     });
   }
 

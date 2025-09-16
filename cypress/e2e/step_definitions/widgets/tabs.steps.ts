@@ -6,7 +6,7 @@ const mainPage = new MainPage();
 const tabsPage = new TabsPage();
 
 When('I navigate to the Tabs section', () => {
-  mainPage.clickSidebarOption('Tabs'); // submenu Tabs
+  mainPage.clickSidebarOption('Tabs');
 });
 
 When('I click the {string} tab', (tabName: string) => {
@@ -26,7 +26,6 @@ Then('the "More" tab should be disabled', () => {
 });
 
 Then('the {string} tab should be active by default', (tabName: string) => {
-  // apenas delega para o método do TabsPage
   const tabsPage = new TabsPage();
   tabsPage.tabShouldBeActive(tabName as 'What' | 'Origin' | 'Use');
 });

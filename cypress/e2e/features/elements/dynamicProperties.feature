@@ -1,7 +1,4 @@
 Feature: Dynamic Properties Page
-  As a user
-  I want to validate the dynamic behavior of the buttons
-  So that I can confirm they change after 5 seconds
 
   Scenario: Enable After button should change from disabled to enabled
     Given I open the DemoQA home page

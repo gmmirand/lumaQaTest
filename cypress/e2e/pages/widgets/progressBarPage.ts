@@ -18,7 +18,7 @@ export class ProgressBarPage {
     }
 
     clickStop() {
-        this.startButton().should('be.visible').click(); // start/stop é o mesmo botão
+        this.startButton().should('be.visible').click();
     }
 
     clickReset() {

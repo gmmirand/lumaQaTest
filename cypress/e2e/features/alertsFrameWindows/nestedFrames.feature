@@ -1,7 +1,4 @@
 Feature: Nested Frames
-  As a user
-  I want to interact with nested frames
-  So that I can verify content inside parent and child iframes
 
   Scenario: Validate parent frame content
     Given I open the DemoQA home page

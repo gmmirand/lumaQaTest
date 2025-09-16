@@ -5,13 +5,11 @@ import { FramesPage } from '../../pages/alertsFrameWindows/framesPage';
 const mainPage = new MainPage();
 const framesPage = new FramesPage();
 
-// ---------- Navegação ----------
 When('I navigate to the Frames section', () => {
   mainPage.clickCard('Alerts, Frame & Windows');
   framesPage.clickFramesOption();
 });
 
-// ---------- Validação do conteúdo dos iframes ----------
 Then('I should validate that the first iframe contains {string}', (text: string) => {
   framesPage.getFirstIframeBody().contains(text).should('be.visible');
 });

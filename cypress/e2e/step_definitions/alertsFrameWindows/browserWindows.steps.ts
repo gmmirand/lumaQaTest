@@ -14,12 +14,10 @@ When('I navigate to the Browser Windows section', () => {
   mainPage.clickSidebarOption('Browser Windows');
 });
 
-// ---------- Intercept window.open ----------
 When('I click the {string} button', (buttonName: string) => {
-  // Stub de window.open usando Cypress.sinon
   cy.window().then((win) => {
     const stub = (globalThis.Cypress.sinon.stub as any)(win, 'open');
-    cy.wrap(stub).as('windowOpen');
+    cy.wrap(stub).as('windowOpen')
   });
 
 

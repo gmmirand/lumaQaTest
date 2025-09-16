@@ -7,26 +7,21 @@ import { DataTable } from '@badeball/cypress-cucumber-preprocessor';
 const mainPage = new MainPage();
 const formPage = new PracticeFormPage();
 
-// 2️⃣ Navegar para Practice Form
 When('I navigate to the Practice Form page', () => {
   mainPage.clickCard('Forms');
   mainPage.clickSidebarOption('Practice Form');
 });
 
-// 3️⃣ Submeter formulário vazio
 When('I submit the empty form', () => {
   formPage.submitForm();
 });
 
-// 4️⃣ Validar campos obrigatórios
 Then('I should see required field warnings', () => {
   formPage.assertRequiredFieldWarnings();
-});
+})
 
 When('I fill in the form with valid data', (dataTable: DataTable) => {
-  const data = dataTable.rowsHash(); // transforma a tabela em objeto { chave: valor }
-
-  // Preenche os campos
+  const data = dataTable.rowsHash();
   if (data.firstName) {
     cy.get('#firstName').clear().type(data.firstName);
   }
@@ -45,12 +40,10 @@ When('I fill in the form with valid data', (dataTable: DataTable) => {
 });
 
 
-// 6️⃣ Submeter formulário preenchido
 When('I submit the form', () => {
   formPage.submitForm();
 });
 
-// 7️⃣ Validar submissão bem-sucedida
 Then('I should see a successful submission', () => {
   formPage.assertSuccessfulSubmission();
 });

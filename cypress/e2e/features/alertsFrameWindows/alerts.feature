@@ -1,7 +1,4 @@
 Feature: JavaScript Alerts
-  As a user
-  I want to interact with JavaScript Alerts
-  So that I can validate different alert types
 
   Scenario: Click Button to see simple alert
     Given I open the DemoQA home page

@@ -1,7 +1,4 @@
 Feature: Upload and Download Page
-  As a user
-  I want to download and upload files
-  So that I can verify the Upload & Download functionality
 
   Scenario: Download the sample file
     Given I open the DemoQA home page

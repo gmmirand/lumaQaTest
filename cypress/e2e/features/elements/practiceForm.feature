@@ -1,7 +1,4 @@
 Feature: Practice Form
-  As a user
-  I want to submit the Practice Form
-  So that I can verify required field validations and successful submissions
 
   Scenario: Submit empty form
     Given I open the DemoQA home page

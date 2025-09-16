@@ -1,7 +1,4 @@
 Feature: Slider
-  As a user
-  I want to change the slider value
-  So that I can see the correct value displayed
 
   Scenario: Verify initial slider value
     Given I open the DemoQA home page

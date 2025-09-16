@@ -12,10 +12,8 @@ export class DatePickerPage {
     }
 
     chooseDate(date: string) {
-        // Converte a data para pegar o dia
         const day = new Date(date).getDate().toString();
 
-        // Clica no dia correspondente
         cy.get('.react-datepicker__day')
             .not('.react-datepicker__day--outside-month')
             .contains(day)
@@ -34,15 +32,14 @@ export class DatePickerPage {
         this.dateAndTimeInput()
             .invoke('val')
             .then((actual) => {
-                if (!actual) throw new Error('Input vazio');
+                const actualString = actual as string; // informa pro TS que é string
+                if (!actualString) throw new Error('Input vazio');
 
-                // Normaliza a hora: transforma 2:30 PM em 02:30 PM
-                const normalized = actual.replace(/\b(\d):/, '0$1:');
+                const normalized = actualString.replace(/\b(\d):/, '0$1:');
 
                 cy.wrap(normalized).should('eq', expected);
             });
     }
-
 
 }
 

@@ -30,19 +30,16 @@ export class WebTablePage {
         }
     }
 
-verifyPagination() {
-    // Clica no botão Next
-    cy.get('.-next button').should('not.be.disabled').click();
+    verifyPagination() {
+        cy.get('.-next button').should('not.be.disabled').click();
 
-    // Valida que o primeiro usuário da segunda página é User7 Test7
-    cy.get('.rt-tbody .rt-tr-group').first().within(() => {
-        cy.get('.rt-td').eq(0).should('have.text', 'User7'); // First Name
-        cy.get('.rt-td').eq(1).should('have.text', 'Test7'); // Last Name
-    });
+        cy.get('.rt-tbody .rt-tr-group').first().within(() => {
+            cy.get('.rt-td').eq(0).should('have.text', 'User7');
+            cy.get('.rt-td').eq(1).should('have.text', 'Test7');
+        });
 
-    // Verifica também o input da página
-    cy.get('.-pageJump input').should('have.value', '2');
-}
+        cy.get('.-pageJump input').should('have.value', '2');
+    }
 
 }
 

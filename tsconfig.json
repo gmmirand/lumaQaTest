@@ -14,11 +14,11 @@
     "sourceMap": false,
     "outDir": "./dist",
     "rootDir": "./",
-    "types": ["cypress"]   // 👈 deixa só cypress aqui
+    "types": ["cypress"]
   },
   "include": [
     "cypress/**/*.ts",
-    "cypress.config.ts"   // 👈 garante que o config entra também
+    "cypress.config.ts" 
   ],
   "exclude": [
     "node_modules",

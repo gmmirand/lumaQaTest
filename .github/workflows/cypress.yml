@@ -27,11 +27,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 4️⃣ Roda os testes (UI + API), merge dos JSONs e gera HTML único
-      - name: Run Cypress tests and generate report
-        run: npm test
+      # 4️⃣ Roda os testes UI no Chrome headless
+      - name: Run Cypress UI tests (Chrome Headless)
+        run: npx cypress run --browser chrome --headless --spec "cypress/e2e/features/**/*.feature" --reporter mochawesome --reporter-options reportDir=cypress/reports/ui,json=true,html=false,overwrite=false
 
-      # 5️⃣ Upload do relatório final (JSON + HTML)
+      # 5️⃣ Roda os testes API
+      - name: Run Cypress API tests
+        run: npx cypress run --spec "cypress/api/features/**/*.feature" --reporter mochawesome --reporter-options reportDir=cypress/reports/api,json=true,html=false,overwrite=false
+
+      # 6️⃣ Merge dos JSONs e gera HTML
+      - name: Merge reports and generate HTML
+        run: |
+          mkdir -p cypress/reports/merged
+          npx mochawesome-merge cypress/reports/**/*json > cypress/reports/merged/mochawesome.json
+          npx marge cypress/reports/merged/mochawesome.json --reportDir cypress/reports/merged --inline
+
+      # 7️⃣ Upload do relatório final (JSON + HTML)
       - name: Upload Cypress merged report
         if: always()
         uses: actions/upload-artifact@v4
@@ -39,7 +50,7 @@ jobs:
           name: cypress-report
           path: cypress/reports/merged
 
-      # 6️⃣ Upload de screenshots (caso existam)
+      # 8️⃣ Upload de screenshots (caso existam)
       - name: Upload Cypress screenshots
         if: always() && hashFiles('cypress/screenshots/**') != ''
         uses: actions/upload-artifact@v4
@@ -47,7 +58,7 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
 
-      # 7️⃣ Upload de vídeos (caso existam)
+      # 9️⃣ Upload de vídeos (caso existam)
       - name: Upload Cypress videos
         if: always() && hashFiles('cypress/videos/**') != ''
         uses: actions/upload-artifact@v4

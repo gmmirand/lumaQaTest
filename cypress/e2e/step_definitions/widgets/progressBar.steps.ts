@@ -1,4 +1,3 @@
-// cypress/e2e/step_definitions/progressBar.steps.ts
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { MainPage } from '../../pages/mainPage';
 import { ProgressBarPage } from '../../pages/widgets/progressBarPage';
@@ -7,12 +6,10 @@ import { expect } from 'chai';
 const mainPage = new MainPage();
 const progressBarPage = new ProgressBarPage();
 
-// Novo step adicionado
 Given('I go to the Progress Bar page', () => {
   mainPage.clickSidebarOption('Progress Bar');
 });
 
-// Steps existentes
 When('I click the start button', () => {
   progressBarPage.clickStart();
 });

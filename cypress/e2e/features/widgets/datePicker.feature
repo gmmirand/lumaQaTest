@@ -1,7 +1,4 @@
 Feature: Date Picker
-  As a user
-  I want to select dates and date & time
-  So that I can see the values correctly in the input fields
 
   Scenario: Select a date using the "Select Date" picker
     Given I open the DemoQA home page

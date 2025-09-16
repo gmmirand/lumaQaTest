@@ -1,7 +1,6 @@
 export class ModalDialogsPage {
 
   navigateToModalDialogs() {
-    // Abre o menu principal e clica em Modal Dialogs
     cy.contains('Alerts, Frame & Windows').click();
     cy.contains('Modal Dialogs').click();
   }

@@ -1,7 +1,4 @@
 Feature: Browser Windows
-  As a user
-  I want to interact with Browser Windows
-  So that I can verify window interactions without opening new tabs
 
   Scenario: Open a new tab
     Given I open the DemoQA home page

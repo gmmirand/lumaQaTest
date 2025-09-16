@@ -1,7 +1,4 @@
 Feature: Frames
-  As a user
-  I want to interact with Frames
-  So that I can verify content inside iframes
 
   Scenario: Validate first iframe content
     Given I open the DemoQA home page

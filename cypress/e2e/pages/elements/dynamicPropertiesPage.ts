@@ -1,19 +1,17 @@
 export class DynamicPropertiesPage {
-  // Selectors
+
   enableAfterButton = '#enableAfter';
   colorChangeButton = '#colorChange';
   visibleAfterButton = '#visibleAfter';
 
-  // Ação: visitar página diretamente (backup)
+
   openPage() {
     cy.visit('/dynamic-properties');
   }
 
-  // Métodos de asserção
-
   assertEnableButtonInitiallyDisabled() {
-    cy.get(this.enableAfterButton, { timeout: 7000 }) // espera até 7s
-      .should('exist') // garante que o botão está na página
+    cy.get(this.enableAfterButton, { timeout: 7000 })
+      .should('exist')
       .should('be.disabled');
   }
 

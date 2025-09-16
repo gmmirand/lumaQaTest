@@ -1,7 +1,4 @@
 Feature: Tabs
-  As a user
-  I want to navigate between tabs
-  So that I can view the content of each tab
 
   Scenario: Verify default active tab
     Given I open the DemoQA home page

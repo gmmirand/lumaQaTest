@@ -1,12 +1,7 @@
-// cypress/e2e/step_definitions/API.steps.ts
 import { When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { DataTable } from '@badeball/cypress-cucumber-preprocessor';
 
 let resourceId: string;
-
-// ======================
-// GET Requests
-// ======================
 
 When('I send a GET request to {string}', (endpoint: string) => {
   cy.request('GET', `https://api.restful-api.dev${endpoint}`).then((response) => {
@@ -14,9 +9,6 @@ When('I send a GET request to {string}', (endpoint: string) => {
   });
 });
 
-// ======================
-// POST Requests
-// ======================
 
 When('I send a POST request to {string} with body:', (endpoint: string, dataTable: DataTable) => {
   const body = dataTable.rowsHash();
@@ -25,11 +17,6 @@ When('I send a POST request to {string} with body:', (endpoint: string, dataTabl
     if (response.body?.id) resourceId = response.body.id; // opcional safe check
   });
 });
-
-
-// ======================
-// Composite Steps (Create + Update/Delete)
-// ======================
 
 When('I create and update a resource with name {string} with body:', (name: string, dataTable: DataTable) => {
   const createBody = { name };
@@ -60,9 +47,6 @@ When('I create and delete a resource with name {string}', (name: string) => {
   });
 });
 
-// ======================
-// Response Validation Steps
-// ======================
 
 Then('the response status should be {int}', (status: number) => {
   cy.get('@response').then((response: any) => {
@@ -95,9 +79,6 @@ Then('the response body should have property {string}', (property: string) => {
   });
 });
 
-// ======================
-// Utility Steps (Create/Update/Delete Individually)
-// ======================
 
 When('I create a new resource with body:', (dataTable: DataTable) => {
   const body = dataTable.rowsHash();

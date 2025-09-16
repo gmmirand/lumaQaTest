@@ -1,7 +1,4 @@
 Feature: Tool Tips
-  As a user
-  I want to see tooltips when hovering over elements
-  So that I can get additional information
 
   Scenario: Hover over button
     Given I open the DemoQA home page

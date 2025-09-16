@@ -1,7 +1,4 @@
 Feature: Menu
-  As a user
-  I want to interact with the Menu widget
-  So that I can expand and validate submenus
 
   Scenario: Validate Main Item 1
     Given I open the DemoQA home page

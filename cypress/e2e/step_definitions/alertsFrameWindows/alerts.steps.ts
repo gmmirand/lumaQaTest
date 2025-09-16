@@ -6,13 +6,11 @@ import { expect } from 'chai';
 const mainPage = new MainPage();
 const alertsPage = new AlertsPage();
 
-// ---------- Navegação ----------
 When('I navigate to the Alerts section', () => {
   mainPage.clickCard('Alerts, Frame & Windows');
   mainPage.clickSidebarOption('Alerts');
 });
 
-// ---------- Simple Alert ----------
 When('I click the {string} button for simple alert', () => {
   alertsPage.clickSimpleAlert();
 });
@@ -23,7 +21,6 @@ Then('I should validate the alert text is {string}', (text: string) => {
   });
 });
 
-// ---------- Timer Alert ----------
 When('I click the {string} button for timer alert', () => {
   alertsPage.clickTimerAlert();
 });
@@ -34,7 +31,6 @@ Then('I should validate the timer alert text is {string}', (text: string) => {
   });
 });
 
-// ---------- Confirm ----------
 When('I click the {string} button for confirm', () => {
   alertsPage.clickConfirm();
 });
@@ -46,7 +42,6 @@ Then('I should validate the confirm text is {string}', (text: string) => {
   });
 });
 
-// ---------- Prompt ----------
 When('I click the {string} button for prompt', (buttonName: string) => {
   cy.window().then((win) => {
     (cy as any).stub(win, 'prompt').returns('Cypress Test');
@@ -57,6 +52,5 @@ When('I click the {string} button for prompt', (buttonName: string) => {
 });
 
 Then('I should validate the page displays the prompt result', () => {
-  // Verifica o resultado do prompt na página
   cy.contains('You entered Cypress Test').should('be.visible');
 });

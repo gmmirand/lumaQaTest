@@ -8,24 +8,21 @@ export default defineConfig({
   e2e: {
 
     retries: {
-      runMode: 2,                    // retry 2x quando falhar no CI
-      openMode: 0                    // sem retry no modo interativo
+      runMode: 2,
+      openMode: 0
     },
-
 
     watchForFileChanges: false,
     chromeWebSecurity: false,
 
-    defaultCommandTimeout: 15000, // tempo máximo de comandos como cy.get/cy.contains
-    pageLoadTimeout: 180000,      // tempo máximo para cy.visit carregar a página
-    requestTimeout: 15000,        // timeout para requisições XHR/fetch
-    responseTimeout: 15000,       // timeout para respostas XHR/fetch
+    defaultCommandTimeout: 15000,
+    pageLoadTimeout: 180000,
+    requestTimeout: 15000,
+    responseTimeout: 15000,
 
     async setupNodeEvents(on, config) {
-      // Cucumber plugin
       await addCucumberPreprocessorPlugin(on, config);
 
-      // Tasks personalizadas
       on('task', {
         copyFileToFixtures({ fileName }: { fileName: string }) {
           const downloadsPath = path.join(config.downloadsFolder, fileName);
@@ -54,7 +51,6 @@ export default defineConfig({
         }
       });
 
-      // Webpack preprocessor para TS e Cucumber
       on(
         'file:preprocessor',
         webpack({

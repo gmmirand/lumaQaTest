@@ -10,7 +10,6 @@ export class MenuPage {
       .parent('li')
       .find('ul li a')
       .then(($elements: JQuery<HTMLElement>) => {
-        // Converte para array de textos
         const texts = Cypress._.map($elements, el => el.innerText.trim());
 
         subItems.forEach(item => {

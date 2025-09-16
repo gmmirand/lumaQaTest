@@ -1,5 +1,5 @@
 export class AlertsPage {
-  // Botões
+  
   simpleAlertButton = '#alertButton';
   timerAlertButton = '#timerAlertButton';
   confirmButton = '#confirmButton';

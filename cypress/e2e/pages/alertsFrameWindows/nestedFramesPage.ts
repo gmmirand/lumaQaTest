@@ -8,15 +8,15 @@ export class NestedFramesPage {
   getParentFrameBody(): Cypress.Chainable<HTMLElement> {
     return cy.get('#frame1')
       .its('0.contentDocument.body')
-      .should('not.be.empty')  // espera o body do iframe carregar
+      .should('not.be.empty')
       .then(cy.wrap);
   }
 
   getChildFrameBody(): Cypress.Chainable<HTMLElement> {
     return this.getParentFrameBody()
-      .find('iframe')           // encontra o child iframe dentro do parent
+      .find('iframe')
       .its('0.contentDocument.body')
-      .should('not.be.empty')  // espera o body do child carregar
+      .should('not.be.empty')
       .then(cy.wrap);
   }
 }

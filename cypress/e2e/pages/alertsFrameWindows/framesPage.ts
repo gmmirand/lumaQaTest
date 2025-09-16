@@ -1,10 +1,9 @@
 export class FramesPage {
-  // Clica na opção Frames do menu lateral
+
   clickFramesOption() {
     cy.contains('.element-list .menu-list li', 'Frames').click();
   }
 
-  // Retorna o body do primeiro iframe para poder interagir
   getFirstIframeBody() {
     return cy
       .get('#frame1')
