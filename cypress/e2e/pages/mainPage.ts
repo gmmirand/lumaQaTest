@@ -1,6 +1,6 @@
 export class MainPage {
   openHomePage() {
-    cy.visit('https://demoqa.com');
+    cy.visit('https://demoqa.com', { timeout: 180000 }); // 180 segundos
   }
 
   clickCard(cardName: string) {
