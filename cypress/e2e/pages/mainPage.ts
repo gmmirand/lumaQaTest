@@ -9,14 +9,17 @@ export class MainPage {
   }
 
   clickCard(cardName: string) {
-    cy.contains('.card-body h5', cardName)
+    cy.get('.card-body h5', { timeout: 30000 })
+      .contains(cardName)
       .should('be.visible')
       .click();
   }
 
   clickSidebarOption(option: string) {
-    cy.contains('.element-list .menu-list li', option)
+    cy.get('.element-list .menu-list li', { timeout: 30000 })
+      .contains(option)
       .should('be.visible')
       .click();
   }
+
 }
