@@ -2,17 +2,9 @@
 
 ---
 
-## Test - Locally and Mocha via GitHub Actions
-
-<img width="770" height="756" alt="image" src="https://github.com/user-attachments/assets/5ad4b3d9-5e48-4a8c-96ee-d2b2a9ca7b58" />
-
-<img width="1429" height="416" alt="image" src="https://github.com/user-attachments/assets/ab8d0752-6f8e-44bc-882b-b01dd5ea9141" />
-
----
-
 ## Overview
 
-This project automates end-to-end and API tests for [DemoQA](https://demoqa.com) using **Cypress**, **TypeScript**, and **Cucumber (Gherkin)**. The goal is to ensure UI and API quality through maintainable, scalable, and readable test code, with full CI/CD integration.
+This project automates end-to-end and API tests for [DemoQA](https://demoqa.com) using **Cypress**, **TypeScript**, and **Cucumber (Gherkin)**. The goal is to ensure UI and API quality through maintai
 
 ---
 
@@ -46,6 +38,14 @@ cypress/
     e2e.ts
     index.d.ts
 ```
+
+---
+
+## Test - Locally and Mocha via GitHub Actions
+
+<img width="770" height="756" alt="image" src="https://github.com/user-attachments/assets/5ad4b3d9-5e48-4a8c-96ee-d2b2a9ca7b58" />
+
+<img width="1429" height="416" alt="image" src="https://github.com/user-attachments/assets/ab8d0752-6f8e-44bc-882b-b01dd5ea9141" />
 
 ---
 
