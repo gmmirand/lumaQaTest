@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "cypress:open": "cypress open",
+
     "cypress:run:ui": "cypress run --spec 'cypress/e2e/features/**/*.feature' --reporter mochawesome --reporter-options reportDir=cypress/reports/ui,json=true,html=false,overwrite=false",
     "cypress:run:api": "cypress run --spec 'cypress/api/features/**/*.feature' --reporter mochawesome --reporter-options reportDir=cypress/reports/api,json=true,html=false,overwrite=false",
+
     "merge-reports": "mkdir -p cypress/reports/merged && npx mochawesome-merge cypress/reports/**/*json > cypress/reports/merged/mochawesome.json",
     "generate-html": "npx marge cypress/reports/merged/mochawesome.json --reportDir cypress/reports/merged --inline",
+
     "test": "npm run cypress:run:ui && npm run cypress:run:api && npm run merge-reports && npm run generate-html"
   },
   "repository": {

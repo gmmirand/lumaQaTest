@@ -7,6 +7,15 @@ import webpack from '@cypress/webpack-preprocessor';
 export default defineConfig({
   e2e: {
 
+    retries: {
+      runMode: 2,                    // retry 2x quando falhar no CI
+      openMode: 0                    // sem retry no modo interativo
+    },
+
+
+    watchForFileChanges: false,
+    chromeWebSecurity: false,
+
     defaultCommandTimeout: 15000, // tempo máximo de comandos como cy.get/cy.contains
     pageLoadTimeout: 180000,      // tempo máximo para cy.visit carregar a página
     requestTimeout: 15000,        // timeout para requisições XHR/fetch

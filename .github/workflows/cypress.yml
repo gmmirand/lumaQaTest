@@ -27,20 +27,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 4️⃣ Roda todos os testes UI + API em modo headless no Chrome e gera Mochawesome
-      - name: Run Cypress tests
-        run: |
-          npx cypress run --browser chrome --headless \
-            --reporter mochawesome \
-            --reporter-options reportDir=cypress/reports/mochawesome,json=true,html=true,overwrite=true
+      # 4️⃣ Roda os testes (UI + API), merge dos JSONs e gera HTML único
+      - name: Run Cypress tests and generate report
+        run: npm test
 
-      # 5️⃣ Upload do relatório Mochawesome
-      - name: Upload Cypress report
+      # 5️⃣ Upload do relatório final (JSON + HTML)
+      - name: Upload Cypress merged report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cypress-report
-          path: cypress/reports/mochawesome
+          path: cypress/reports/merged
 
       # 6️⃣ Upload de screenshots (caso existam)
       - name: Upload Cypress screenshots
