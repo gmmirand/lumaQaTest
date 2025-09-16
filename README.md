@@ -72,7 +72,7 @@ cypress/
 Clone the repository and install dependencies:
 
 ```sh
-git clone <repo-url>
+git clone git@github.com:gmmirand/lumaQaTest.git
 cd lumaQaTest
 npm install
 ```
