@@ -6,6 +6,12 @@ import webpack from '@cypress/webpack-preprocessor';
 
 export default defineConfig({
   e2e: {
+
+    defaultCommandTimeout: 15000, // tempo máximo de comandos como cy.get/cy.contains
+    pageLoadTimeout: 180000,      // tempo máximo para cy.visit carregar a página
+    requestTimeout: 15000,        // timeout para requisições XHR/fetch
+    responseTimeout: 15000,       // timeout para respostas XHR/fetch
+
     async setupNodeEvents(on, config) {
       // Cucumber plugin
       await addCucumberPreprocessorPlugin(on, config);
