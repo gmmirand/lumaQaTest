@@ -1,6 +1,6 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import { MainPage } from '../pages/mainPage';
-import { AlertsPage } from '../pages/alertsPage';
+import { MainPage } from '../../pages/mainPage';
+import { AlertsPage } from '../../pages/alertsFrameWindows/alertsPage';
 import { expect } from 'chai';
 
 const mainPage = new MainPage();
@@ -49,9 +49,10 @@ Then('I should validate the confirm text is {string}', (text: string) => {
 // ---------- Prompt ----------
 When('I click the {string} button for prompt', (buttonName: string) => {
   cy.window().then((win) => {
-    // Stub do prompt apenas UMA VEZ antes do clique
-    globalThis.Cypress.sinon.stub(win, 'prompt').returns('Cypress Test');
+    (cy as any).stub(win, 'prompt').returns('Cypress Test');
+    alertsPage.clickPrompt();
   });
+
   alertsPage.clickPrompt();
 });
 

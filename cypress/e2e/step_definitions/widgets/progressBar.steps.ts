@@ -1,7 +1,7 @@
 // cypress/e2e/step_definitions/progressBar.steps.ts
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import { MainPage } from '../pages/mainPage';
-import { ProgressBarPage } from '../pages/progressBarPage';
+import { MainPage } from '../../pages/mainPage';
+import { ProgressBarPage } from '../../pages/widgets/progressBarPage';
 import { expect } from 'chai';
 
 const mainPage = new MainPage();

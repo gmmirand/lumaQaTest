@@ -1,5 +1,5 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import { SliderPage } from '../pages/sliderPage';
+import { SliderPage } from '../../pages/widgets/sliderPage';
 
 const sliderPage = new SliderPage();
 

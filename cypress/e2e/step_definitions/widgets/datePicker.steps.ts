@@ -1,7 +1,7 @@
 // cypress/e2e/step_definitions/datePicker.steps.ts
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import DatePickerPage from '../pages/datePickerPage';
-import { MainPage } from '../pages/mainPage';
+import DatePickerPage from '../../pages/widgets/datePickerPage';
+import { MainPage } from '../../pages/mainPage';
 
 const mainPage = new MainPage();
 

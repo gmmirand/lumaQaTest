@@ -1,5 +1,5 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import { ModalDialogsPage } from '../pages/modalDialogsPage';
+import { ModalDialogsPage } from '../../pages/alertsFrameWindows/modalDialogsPage';
 
 const modalPage = new ModalDialogsPage();
 

@@ -1,6 +1,6 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import { MainPage } from '../pages/mainPage';
-import { DynamicPropertiesPage } from '../pages/dynamicPropertiesPage';
+import { MainPage } from '../../pages/mainPage';
+import { DynamicPropertiesPage } from '../../pages/elements/dynamicPropertiesPage';
 
 const mainPage = new MainPage();
 const dp = new DynamicPropertiesPage();

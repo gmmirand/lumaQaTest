@@ -1,5 +1,5 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import { NestedFramesPage } from '../pages/nestedFramesPage';
+import { NestedFramesPage } from '../../pages/alertsFrameWindows/nestedFramesPage';
 
 const nestedFramesPage = new NestedFramesPage();
 

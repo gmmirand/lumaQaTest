@@ -1,6 +1,6 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import { MainPage } from '../pages/mainPage';
-import { accordionPage } from '../pages/accordianPage';
+import { MainPage } from '../../pages/mainPage';
+import { accordionPage } from '../../pages/widgets/accordianPage';
 
 const mainPage = new MainPage();
 
@@ -17,15 +17,15 @@ Then('I should see all Accordian sections', () => {
 });
 
 Then('I can expand and collapse each section', () => {
-    accordionPage.getSectionsCount().then(count => {
+    accordionPage.getSectionsCount().then((count: number) => {
         for (let i = 0; i < count; i++) {
             accordionPage.expandSectionByIndex(i);
             accordionPage.contentShouldBeVisibleByIndex(i);
 
             if (i > 0) {
-                // garante que a anterior foi colapsada
                 accordionPage.contentShouldNotBeVisibleByIndex(i - 1);
             }
         }
     });
+
 });

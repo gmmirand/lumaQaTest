@@ -1,6 +1,6 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import { MainPage } from '../pages/mainPage';
-import { WebTablePage } from '../pages/webTablePage';
+import { MainPage } from '../../pages/mainPage';
+import { WebTablePage } from '../../pages/elements/webTablePage';
 
 const mainPage = new MainPage();
 const webTablePage = new WebTablePage();

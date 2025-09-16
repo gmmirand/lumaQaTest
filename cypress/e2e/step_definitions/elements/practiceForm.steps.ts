@@ -1,6 +1,6 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import { MainPage } from '../pages/mainPage';
-import { PracticeFormPage } from '../pages/practiceFormPage';
+import { MainPage } from '../../pages/mainPage';
+import { PracticeFormPage } from '../../pages/elements/practiceFormPage';
 import { DataTable } from '@badeball/cypress-cucumber-preprocessor';
 
 

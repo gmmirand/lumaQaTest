@@ -1,6 +1,6 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import { MainPage } from '../pages/mainPage';
-import { BrowserWindowsPage } from '../pages/browserWindowsPage';
+import { MainPage } from '../../pages/mainPage';
+import { BrowserWindowsPage } from '../../pages/alertsFrameWindows/browserWindowsPage';
 
 const mainPage = new MainPage();
 const browserPage = new BrowserWindowsPage();
@@ -18,9 +18,10 @@ When('I navigate to the Browser Windows section', () => {
 When('I click the {string} button', (buttonName: string) => {
   // Stub de window.open usando Cypress.sinon
   cy.window().then((win) => {
-    const stub = globalThis.Cypress.sinon.stub(win, 'open');
-    cy.wrap(stub).as('windowOpen'); // aqui criamos o alias
+    const stub = (globalThis.Cypress.sinon.stub as any)(win, 'open');
+    cy.wrap(stub).as('windowOpen');
   });
+
 
   switch (buttonName) {
     case 'New Tab':
