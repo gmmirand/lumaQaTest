@@ -29,10 +29,20 @@ jobs:
             --reporter-options "reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true"
 
       - name: Merge Mochawesome JSONs
-        run: npx mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome/mochawesome.json
+        run: |
+          if compgen -G "cypress/reports/mochawesome/*.json" > /dev/null; then
+            npx mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome/mochawesome.json
+          else
+            echo "No JSON reports found, skipping merge"
+          fi
 
       - name: Generate HTML report
-        run: npx marge cypress/reports/mochawesome/mochawesome.json --reportDir cypress/reports/mochawesome --inline
+        run: |
+          if [ -f cypress/reports/mochawesome/mochawesome.json ]; then
+            npx marge cypress/reports/mochawesome/mochawesome.json --reportDir cypress/reports/mochawesome --inline
+          else
+            echo "No merged JSON report found, skipping HTML generation"
+          fi
 
       - name: Upload Cypress report
         uses: actions/upload-artifact@v4
