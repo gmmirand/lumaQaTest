@@ -28,23 +28,13 @@ jobs:
           npx cypress run --browser chrome --headless --reporter mochawesome \
             --reporter-options "reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true"
 
-      - name: Merge Mochawesome JSONs (skip empty/corrupted)
-        run: |
-          mkdir -p cypress/reports/mochawesome
-          JSON_FILES=$(find cypress/reports/mochawesome -name "*.json" -size +0c)
-          if [ -n "$JSON_FILES" ]; then
-            npx mochawesome-merge $JSON_FILES > cypress/reports/mochawesome/mochawesome.json
-          else
-            echo "No valid JSON reports found, skipping merge"
-          fi
-
       - name: Generate HTML report
         run: |
           if [ -f cypress/reports/mochawesome/mochawesome.json ]; then
             npx marge cypress/reports/mochawesome/mochawesome.json \
               --reportDir cypress/reports/mochawesome --inline
           else
-            echo "No merged JSON report found, skipping HTML generation"
+            echo "No JSON report found, skipping HTML generation"
           fi
 
       - name: Upload Cypress report
