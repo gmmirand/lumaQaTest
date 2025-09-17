@@ -22,4 +22,4 @@ Feature: JavaScript Alerts
     Given I open the DemoQA home page
     When I navigate to the Alerts section
     And I click the "Click me" button for prompt
-    And I should validate the page displays the prompt result
+    Then I should validate the page displays the prompt result
